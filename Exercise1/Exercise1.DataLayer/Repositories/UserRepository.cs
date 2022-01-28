@@ -34,7 +34,7 @@ namespace Exercise1.DataLayer.Repositories
                 "LastName = @LastName, " +
                 "Email = @Email, " +
                 "Age = @Age, " +
-                "AvatarUrl = @AvatarUrl, " +
+                "AvatarUrl = @AvatarUrl " +
                 "WHERE Id = @Id;";
             _dbConnection.Query(sql, user);
             return user.Id;
