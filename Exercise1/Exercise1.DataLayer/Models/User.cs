@@ -2,7 +2,7 @@
 {
     public class User
     {
-        public User(int? id, string email, string firstName, string? lastName, int? age, string? avatarUrl)
+        public User(int id, string email, string firstName, string? lastName, int? age, string? avatarUrl)
         {
             Id = id;
             Email = email;
@@ -12,7 +12,7 @@
             AvatarUrl = avatarUrl;
         }
 
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string? LastName { get; set; }
