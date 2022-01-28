@@ -2,6 +2,8 @@
 {
     public class User
     {
+        public User() { }
+
         public User(int id, string email, string firstName, string? lastName, int? age, string? avatarUrl)
         {
             Id = id;
