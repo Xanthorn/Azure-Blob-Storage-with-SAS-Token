@@ -1,7 +1,7 @@
 using Exercise1.DataLayer.Repositories;
-using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 var builder = WebApplication.CreateBuilder(args);
+IConfiguration configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-IUserRepository userRepository = new UserRepository(ConfigurationManager.ConnectionStrings["AzureSqlServer"].ConnectionString);
+IUserRepository userRepository = new UserRepository(configuration.GetValue<string>("ConnectionStrings:AzureSqlServer"));
 builder.Services.AddSingleton(userRepository);
 
 var app = builder.Build();
