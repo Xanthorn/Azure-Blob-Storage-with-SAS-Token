@@ -11,10 +11,10 @@ namespace Exercise1.DataLayer.Azure.StorageAccount
         private readonly BlobContainerClient _blobContainerClient;
         private readonly string _blobKey;
 
-        public BlobContainerService(string blobConnectionString, string blobContainerName, string blobKey)
+        public BlobContainerService(BlobContainerSettings settings)
         {
-            _blobContainerClient = new(blobConnectionString, blobContainerName);
-            _blobKey = blobKey;
+            _blobContainerClient = new(settings.ConnectionString, settings.ContainerName);
+            _blobKey = settings.BlobKey;
         }
 
         public async Task<string> UpdateImage(IFormFile image, string? oldImageName)
