@@ -16,7 +16,7 @@ namespace Exercise1.DataLayer.Repositories
 
         public int AddUser(User user)
         {
-            var sql = "INSERT INTO Users (FirstName, LastName, Email, Age, AvatarUrl) VALUES(@FirstName, @LastName, @Email, @Age, @AvatarUrl);" +
+            var sql = "INSERT INTO Users (FirstName, LastName, Email, Age, AvatarName) VALUES(@FirstName, @LastName, @Email, @Age, @AvatarName);" +
                 "SELECT CAST(SCOPE_IDENTITY() as int);";
 
             int id = _dbConnection.Query<int>(sql, user).Single();
@@ -34,7 +34,7 @@ namespace Exercise1.DataLayer.Repositories
                 "LastName = @LastName, " +
                 "Email = @Email, " +
                 "Age = @Age, " +
-                "AvatarUrl = @AvatarUrl " +
+                "AvatarName = @AvatarName " +
                 "WHERE Id = @Id;";
             _dbConnection.Query(sql, user);
             return user.Id;
