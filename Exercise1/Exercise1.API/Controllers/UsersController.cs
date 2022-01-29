@@ -1,6 +1,7 @@
 ﻿using Exercise1.API.Contracts;
 using Exercise1.API.Contracts.User.Add;
 using Exercise1.API.Contracts.User.Edit;
+using Exercise1.API.Contracts.User.GetById;
 using Exercise1.DataLayer.Azure.StorageAccount;
 using Exercise1.DataLayer.Models;
 using Exercise1.DataLayer.Repositories;
@@ -24,16 +25,25 @@ namespace Exercise1.API.Controllers
         public List<User> GetUsers() => _userRepository.GetUsers();
 
         [HttpGet(ApiRoutes.User.GetById)]
-        public User GetUserById([FromRoute] int id)
+        public GetUserByIdResponse GetUserById([FromRoute] int id)
         {
             User user = _userRepository.GetUser(id);
 
+            GetUserByIdResponse response = new()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Age = user.Age,
+            };
+
             if (user.AvatarName != null)
             {
-                user.AvatarName = _blobContainerService.GetImageUri(user.AvatarName);
+                response.AvatarUrl = _blobContainerService.GetImageUri(user.AvatarName);
             }
 
-            return user;
+            return response;
         }
 
         [HttpPost(ApiRoutes.User.Add)]
