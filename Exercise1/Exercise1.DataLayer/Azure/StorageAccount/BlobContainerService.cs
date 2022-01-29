@@ -17,10 +17,13 @@ namespace Exercise1.DataLayer.Azure.StorageAccount
             _blobKey = blobKey;
         }
 
-        public async Task<string> UpdateImage(IFormFile image, string oldImageName)
+        public async Task<string> UpdateImage(IFormFile image, string? oldImageName)
         {
-            BlobClient blobClient = _blobContainerClient.GetBlobClient(oldImageName);
-            await blobClient.DeleteIfExistsAsync();
+            if(oldImageName == null)
+            {
+                BlobClient blobClient = _blobContainerClient.GetBlobClient(oldImageName);
+                await blobClient.DeleteIfExistsAsync();
+            }
 
             return await UploadImage(image);
         }
